@@ -1,7 +1,6 @@
 # find me
 
 ![challenge](./chall.png)
-
 ---
 Tải về chạy thử chương trình thì thấy chương trình tạo một file flag.txt trong tất cả các thư mục của ổ C. Nhưng khi mở ra thì....
 Như vậy có thể flag sẽ được giấu ở đâu đó trong ổ C vì Find mee in C Diskk mà :v Vì vậy mình sẽ dùng Process Monitor xem chương trình nó làm gì, setup Fillter sẽ gồm 2 Operator là `CreateFile` và `WriteFile`, và chọn tên của chương trình `source.exe` và ta được kết quả:
