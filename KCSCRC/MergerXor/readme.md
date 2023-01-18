@@ -69,7 +69,7 @@ Flat(unsigned char *input,int len){
 ```
 Hàm này trích xuất 4 bit cuối cùng của kí tự hiện tại và 4 bit đầu tiên của kí tự tiếp theo sau đó hợp nhất lại với nhau để tạo ra một khối mới rồi XOR khối đó với kí tự hiện tại và lưu trữ kết quả vào chuỗi `cipher[]`.Sau khi hoàn thành thì nó sẽ ghi đè chuỗi ban đầu bằng chuỗi `cipher[]`.Điều này được lặp lại 5 lần, cuối cùng nó in ra kết quả giống trong file stdout.txt.
 
-##reverse
+## reverse
 Sau 5 lần mã hóa sẽ tạo ra 5 dãy mã, và bài in dãy mã cuối cùng. Để giải mã ngược lại từng dãy thì ta chỉ cần dãy mã hiện tại và phần tử đầu tiên của dãy mã trước.Nhưng làm sao để tìm được phần tử của dãy mã trước đây? Tia hi vọng duy nhất là từ 5 kí tự đầu của fomart flag `KCSC{`.Lấy 5 kí tự này chạy 5 lần hàm mã hóa `Flat()` thì ta sẽ thu được:
 - Lần 0 5 kí tự đúng: 0x4b,0x43,0x53,0x43,0x7b("KCSC{")
 - Lần 1 4 kí tự đúng: 0xff,0x76,0x67,0x74,0xc?(đúng 4 bit đầu)
@@ -78,8 +78,9 @@ Sau 5 lần mã hóa sẽ tạo ra 5 dãy mã, và bài in dãy mã cuối cùng
 - Lần 4 3 kí tự đúng: 0x18,0x00,0x28
 - Lần 5: 0x98,0x02,0xaa,0x9b,0xfe,0xdc,0x44,0x73,0xef,0x9d,0x40,0xdd,0xd8,0x05,0xc9,0xea,0x51,0xcd,0xab,0x01,0x77,0x14,0x8c,0x62,0x51,0xea,0x41,0xbe,0xae,0x33,0x23,0xd9,0x9d,0xfe,0x22,0x36,0xdb,0x23,0xfa,0x72,0x36,0xfd,0xb9,0xbc,0x11,0x04,0xfc,0xc8,0xdf
 
-Cách giải mã:Ta sẽ giải mã từ Lần 5 dần lên và lấy được flag, ta lấy 4 bit cuối của phần tử hiện tại của dãy mã hiện tại `xor` với 4 bit cuối của phần tử hiện tại của dãy mã trước thì ta được 4 bit đầu của phần tử tiếp theo của mã trước.Sau đó lấy 4 bit đầu của phần tử tiếp theo đó `xor` với 4 bit đầu của phần tử tiếp theo của dãy mã hiện tại, ta sẽ thu được 4 bit cuối của phần tử tiếp theo của dãy mã trước, chạy lần lượt như thế ta sẽ thu được từng dãy mã và cuối cùng là Flag.
-##script
+## Cách giải mã:
+Ta sẽ giải mã từ Lần 5 dần lên và lấy được flag, ta lấy 4 bit cuối của phần tử hiện tại của dãy mã hiện tại `xor` với 4 bit cuối của phần tử hiện tại của dãy mã trước thì ta được 4 bit đầu của phần tử tiếp theo của mã trước.Sau đó lấy 4 bit đầu của phần tử tiếp theo đó `xor` với 4 bit đầu của phần tử tiếp theo của dãy mã hiện tại, ta sẽ thu được 4 bit cuối của phần tử tiếp theo của dãy mã trước, chạy lần lượt như thế ta sẽ thu được từng dãy mã và cuối cùng là Flag.
+## script
 ```python
 a=[0x98,0x02,0xaa,0x9b,0xfe,0xdc,0x44,0x73,0xef,0x9d,0x40,0xdd,0xd8,0x05,0xc9,0xea,0x51,0xcd,0xab,0x01,0x77,0x14,0x8c,0x62,0x51,0xea,0x41,0xbe,0xae,0x33,0x23,0xd9,0x9d,0xfe,0x22,0x36,0xdb,0x23,0xfa,0x72,0x36,0xfd,0xb9,0xbc,0x11,0x04,0xfc,0xc8,0xdf]
 b=[0x18]
@@ -105,5 +106,5 @@ for i in range(0,len(a),1):
 for i in range(len(flag)-1):
      print(chr(flag[i]),end="")
 ```
-##Flag
+## flag
 `KCSC{https://www.youtube.com/watch?v=ueDH4iL7060}`
