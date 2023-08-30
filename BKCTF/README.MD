@@ -151,6 +151,9 @@ print(''.join((d ^ c).to_bytes(2,"little").decode() for d, c in zip(data, cipher
 `BKSEC{C0nGratul4t31}`
 
 
+#### [wu 2 bài nữa trong giải BKCTF](https://hackmd.io/yvMyX-pEQz-ACo6z7Fp4Ow)
+
+
 
 
 
